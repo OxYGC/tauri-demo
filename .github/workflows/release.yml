@@ -3,13 +3,14 @@ name: Release Build
 on:
   push:
     tags:
-      - 'v*'  # 仅当推送 v 开头的tag时触发
-  workflow_dispatch:        # ⭐ 新增：允许手动触发
+      - 'v*'
+  workflow_dispatch:
     inputs:
       tag:
         description: 'Tag to build (e.g. v0.1.0)'
         required: false
         default: ''
+
 jobs:
   release:
     strategy:
@@ -28,19 +29,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Node.js 环境（前端构建）
+      # ⭐ 修改 1：先安装 pnpm（必须在 setup-node 之前）
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+
+      # ⭐ 修改 2：再 setup-node（此时 pnpm 已存在，cache 才能正常工作）
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-      # ⭐ 新增：安装 pnpm
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11.9.0
 
+      # ⭐ 修改 3：只保留一次 pnpm install（删掉了之前重复的那个）
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
+
       # Rust 环境
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -54,11 +59,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      # 安装前端依赖
-      - name: Install frontend dependencies
-        run: pnpm install --frozen-lockfile
-
-      # ⭐ Tauri v2 官方 Action（自动打包 + 生成 updater 产物）
+      # Tauri v2 官方 Action
       - name: Build Tauri App
         uses: tauri-apps/tauri-action@v0
         env:
@@ -68,6 +69,6 @@ jobs:
         with:
           tagName: v__VERSION__
           releaseName: 'App v__VERSION__'
-          releaseDraft: true       # 先创建草稿，手动确认后再发布
+          releaseDraft: true
           prerelease: false
           args: --target ${{ matrix.target }}
