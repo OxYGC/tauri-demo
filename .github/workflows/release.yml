@@ -4,7 +4,12 @@ on:
   push:
     tags:
       - 'v*'  # 仅当推送 v 开头的tag时触发
-
+  workflow_dispatch:        # ⭐ 新增：允许手动触发
+    inputs:
+      tag:
+        description: 'Tag to build (e.g. v0.1.0)'
+        required: false
+        default: ''
 jobs:
   release:
     strategy:
