@@ -39,7 +39,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       # ⭐ 修改 3：只保留一次 pnpm install（删掉了之前重复的那个）
