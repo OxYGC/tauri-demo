@@ -29,7 +29,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-
+      # ⭐ 新增：安装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       # Rust 环境
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
