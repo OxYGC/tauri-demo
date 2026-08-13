@@ -32,7 +32,7 @@ jobs:
 
       # Rust 环境
       - name: Install Rust stable
-        uses: dtolnay/rust-action/setup@stable
+        uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
 
