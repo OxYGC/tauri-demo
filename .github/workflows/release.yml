@@ -3,7 +3,7 @@ name: Release Build
 on:
   push:
     tags:
-      - 'v*'  # 仅当推送 v 开头的 tag 时触发
+      - 'v*'  # 仅当推送 v 开头的tag时触发
 
 jobs:
   release:
