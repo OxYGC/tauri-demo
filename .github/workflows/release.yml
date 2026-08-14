@@ -10,6 +10,9 @@ on:
         description: 'Tag to build (e.g. v0.1.0)'
         required: false
         default: ''
+# ⭐ 新增：授予 Release 写入权限,(Github须显式声明 write 才能创建/更新 Release)
+permissions:
+  contents: write
 
 jobs:
   release:
