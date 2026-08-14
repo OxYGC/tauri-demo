@@ -146,7 +146,7 @@ tauri-demo/
 
 ## 🔐 安全 & 漏洞报告
 
-请阅读 **[SECURITY.md](./SECURITY.md)**。安全问题不要发 GitHub issue，直接发邮件：`<your-security-contact@example.com>`。
+请阅读 **[SECURITY.md](./SECURITY.md)**。安全问题不要发 GitHub issue，直接发邮件：`<keygenee@gmail.com>`。
 
 ---
 
