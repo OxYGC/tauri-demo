@@ -11,6 +11,7 @@
 </p>
 
 ---
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/dd5c57d6-c94d-4c8d-b0cc-2706292a52e5" />
 
 ## ✨ 功能一览
 
